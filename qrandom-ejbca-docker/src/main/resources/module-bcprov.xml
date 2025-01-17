@@ -1,0 +1,24 @@
+<module name="org.bouncycastle.bcprov" xmlns="urn:jboss:module:1.9">
+
+    <properties>
+        <property name="jboss.api" value="private"/>
+    </properties>
+
+    <resources>
+        <resource-root path="bcprov-jdk15on-1.69.jar"/>
+        <resource-root path="qrandom-bcprov-1.0-SNAPSHOT.jar"/>
+    </resources>
+    <provides>
+        <service name="java.security.Provider">
+            <with-class name="org.bouncycastle.jce.provider.BouncyCastleProvider"/>
+            <with-class name="org.bouncycastle.pqc.jcajce.provider.BouncyCastlePQCProvider"/>
+        </service>
+    </provides>
+    <dependencies>
+        <module name="java.naming"/>
+        <module name="java.sql"/>
+        <module name="com.qrypt.qrandom-core"/>
+        <module name="org.slf4j"/>
+        <module name="org.slf4j.impl"/>
+    </dependencies>
+</module>
