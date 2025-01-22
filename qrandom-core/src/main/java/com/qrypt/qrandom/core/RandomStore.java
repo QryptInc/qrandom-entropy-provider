@@ -55,7 +55,14 @@ public interface RandomStore {
 
         public Builder apiClient(APIClient apiClient) {
             this.apiClient = apiClient;
-        	return this;
+            return this;
+        }
+
+        public static synchronized void destroy() {
+            if (INSTANCE != null) {
+                INSTANCE.destroy();
+                INSTANCE = null;
+            }
         }
 
         public synchronized RandomStore build() {

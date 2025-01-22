@@ -9,6 +9,7 @@
         <module>qrandom-core</module>
         <module>qrandom-bcprov</module>
         <module>qrandom-ejbca-docker</module>
+        <module>qrandom-ejbca-loader</module>
     </modules>
 
     <dependencies>

@@ -13,6 +13,13 @@ public class TestChainedEntropy {
 
 
     public static void main(String[] args) throws Exception {
+        //need to add and verify that args[0] is not empty and set it to System property
+        if (args.length == 0) {
+            throw new IllegalArgumentException("Specify api token in the first argument");
+        }
+        System.setProperty("qrypt.api.token", args[0]);
+        System.setProperty("qrypt.api.url", "https://api-eus.qrypt.com/api/v1/entropy");
+
         // 1. Set the BC DRBG Entropy Source property
         //    The value must be the fully-qualified class name of your custom provider
         System.setProperty("org.bouncycastle.drbg.entropysource",

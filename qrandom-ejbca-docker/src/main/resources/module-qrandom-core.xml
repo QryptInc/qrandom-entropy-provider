@@ -20,13 +20,14 @@
   ~ Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
   ~ 02110-1301 USA, or see the FSF site: http://www.fsf.org.
   -->
-<module name="com.qrypt.qrandom-core" xmlns="urn:jboss:module:1.9">
+<module name="com.qrypt.qrandom.core" xmlns="urn:jboss:module:1.9">
 
     <properties>
         <property name="jboss.api" value="private"/>
     </properties>
 
     <resources>
+        <!-- TODO: replace with project.version through docker RUN sed -i -->
         <resource-root path="qrandom-core-1.0-SNAPSHOT.jar"/>
     </resources>
 

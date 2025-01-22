@@ -21,8 +21,12 @@ COPY module-bcprov.xml ${MODULES_PATH}/org/bouncycastle/bcprov/main/module.xml
 COPY gson-2.8.9.jar ${MODULES_PATH}/com/google/code/gson/main
 COPY module-gson.xml ${MODULES_PATH}/com/google/code/gson/main/module.xml
 
-# Define com.qrypt.randomprovider as global-module
-RUN sed -i '/<subsystem xmlns="urn:jboss:domain:ee:6\.0">/a\    <global-modules><module name="com.qrypt.qrandom-core" slot="main"/></global-modules>' /opt/keyfactor/appserver/standalone/configuration/standalone.xml
+# Define com.qrypt.randomprovider as global-module (don't remember why though??)
+RUN sed -i '/<subsystem xmlns="urn:jboss:domain:ee:6\.0">/a\    <global-modules><module name="com.qrypt.qrandom.core" slot="main"/></global-modules>' /opt/keyfactor/appserver/standalone/configuration/standalone.xml
+
+# Append lines to standalone.conf at build time
+COPY standalone.conf /opt/keyfactor/appserver/bin/
+
 
 # Copy random provider initializer and secure random demo to deployments dir
-# COPY random-provider-initializer.war /opt/keyfactor/appserver/standalone/deployments
+COPY qrandom-ejbca-loader.war /opt/keyfactor/appserver/standalone/deployments
