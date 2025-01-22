@@ -1,12 +1,13 @@
 package com.qrypt.qrandom.bcprov;
 
-import com.qrypt.randomprovider.QryptSingleQueueRandomStore;
-import com.qrypt.randomprovider.RandomStore;
+import com.qrypt.qrandom.core.RandomStore;
+import com.qrypt.qrandom.util.Properties;
 import org.bouncycastle.crypto.prng.EntropySource;
 import org.bouncycastle.crypto.prng.EntropySourceProvider;
 import org.bouncycastle.crypto.prng.ThreadedSeedGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import java.util.function.Function;
 
 
 public class ChainedEntropySourceProvider implements EntropySourceProvider {
@@ -58,7 +59,13 @@ public class ChainedEntropySourceProvider implements EntropySourceProvider {
         private final RandomStore store; // your custom buffer of random bytes
 
         public RandomStoreEntropySourceProvider() {
-            this.store = QryptSingleQueueRandomStore.getInstance();
+            String apiUrl = Properties.getProperty("qrypt.api.url", null, Function.identity());
+            String apiToken = Properties.getProperty("qrypt.api.token",null,Function.identity());
+
+            this.store = new RandomStore.Builder()
+                    .apiToken(apiToken)
+                    .apiUrl(apiUrl)
+                    .build();
         }
 
         @Override

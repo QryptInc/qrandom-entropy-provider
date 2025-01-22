@@ -14,6 +14,10 @@ public class ChainedEntropyUnitTests {
 
     @BeforeAll
     static void setup() {
+
+        System.setProperty("qrypt.api.url", "https://api-eus.qrypt.com/api/v1/entropy");
+        System.setProperty("qrypt.api.token", "xxxxxxx");
+
         // Before all tests, set up the entropy source property and insert the Bouncy Castle provider
         System.setProperty("org.bouncycastle.drbg.entropysource",
                 "com.qrypt.qrandom.bcprov.ChainedEntropySourceProvider");

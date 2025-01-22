@@ -1,5 +1,6 @@
 package com.qrypt.qrandom.core;
 
+import com.qrypt.qrandom.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,57 +32,36 @@ public class QryptSingleQueueRandomStore implements RandomStore {
     //the store has to absolutely be SINGLETON
     private static QryptSingleQueueRandomStore instance;
 
-    private static <T> T getSystemProperty(String property, T defaultValue, Function<String,T> converter) {
-        String value = System.getProperty(property);
-        if (value == null) {
-            if (defaultValue == null) {
-                //need to throw proper exception when system property is not defined and no default value exist
-                throw new IllegalArgumentException("Property "+property+" is not defined anywhere and no default value specified");
-            }
-            return defaultValue;
-        }
 
-        try {
-            return converter.apply(value);
-        } catch (NumberFormatException e) {
-            return defaultValue;
-        }
-    }
 
     /**
      * return singleton instance of this class
      * @return singleton instance of this store
      */
-    public static QryptSingleQueueRandomStore getInstance() {
-        if (instance == null) {
-            //thread safety
-            synchronized (QryptSingleQueueRandomStore.class) {
-                if (instance == null) {
-                    String apiUrl = getSystemProperty("qrypt.api.url", null, Function.identity());
-                    String token = getSystemProperty("qrypt.api.token",null,Function.identity());
-                    int storeSize = getSystemProperty("qrypt.store.size",DEFAULT_STORE_SIZE, Integer::valueOf);
-                    int storeMinThreshold = getSystemProperty("qrypt.store.min_threshold",DEFAULT_MIN_THRESHOLD,Integer::valueOf);
+//    public static QryptSingleQueueRandomStore getInstance() {
+//        if (instance == null) {
+//            //thread safety
+//            synchronized (QryptSingleQueueRandomStore.class) {
+//                if (instance == null) {
+//                    String apiUrl = getProperty("qrypt.api.url", null, Function.identity());
+//                    String token = getProperty("qrypt.api.token",null,Function.identity());
+//                    int storeSize = getProperty("qrypt.store.size",DEFAULT_STORE_SIZE, Integer::valueOf);
+//                    int storeMinThreshold = getProperty("qrypt.store.min_threshold",DEFAULT_MIN_THRESHOLD,Integer::valueOf);
+//
+//                    APIClient apiClient = new APIClient.DefaultImpl(apiUrl, token);
+//                    instance = new QryptSingleQueueRandomStore(apiClient, storeSize, storeMinThreshold);
+//                }
+//            }
+//        }
+//        return instance;
+//    }
 
-                    APIClient apiClient = new APIClient.DefaultImpl(apiUrl, token);
-                    instance = new QryptSingleQueueRandomStore(apiClient, storeSize, storeMinThreshold);
-                }
-            }
-        }
-        return instance;
-    }
 
-    /**
-     * non-public accessor for testing purposes
-     * @param client
-     * @param storeSize
-     * @param storeMinThreshold
-     * @return
-     */
-    static QryptSingleQueueRandomStore getInstance(APIClient client, int storeSize, int storeMinThreshold) {
-        return new QryptSingleQueueRandomStore(client, storeSize, storeMinThreshold);
-    }
+//    static QryptSingleQueueRandomStore getInstance(APIClient client, int storeSize, int storeMinThreshold) {
+//        return new QryptSingleQueueRandomStore(client, storeSize, storeMinThreshold);
+//    }
 
-    private QryptSingleQueueRandomStore(APIClient apiClient,
+    QryptSingleQueueRandomStore(APIClient apiClient,
                                         int storeSize,
                                         int minThreshold) {
         logger.info("Initializing and scheduling random Store....");
