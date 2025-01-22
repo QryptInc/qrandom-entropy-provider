@@ -8,7 +8,7 @@
         <artifactId>qrandom-entropy-provider</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-
+    <packaging>pom</packaging>
     <artifactId>qrandom-ejbca-docker</artifactId>
 
     <properties>
@@ -17,6 +17,14 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.qrypt</groupId>
+            <artifactId>qrandom-ejbca-loader</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>war</type>
+        </dependency>
+    </dependencies>
     <build>
         <plugins>
             <!-- Plugin to copy target results to module root directory -->
@@ -36,9 +44,9 @@
                                     <fileset dir="${project.basedir}/../qrandom-core/target">
                                         <include name="qrandom-core-${project.version}.jar"/>
                                     </fileset>
-<!--                                    <fileset dir="${project.basedir}/../random-provider-initializer/target">-->
-<!--                                        <include name="random-provider-initializer.war"/> &lt;!&ndash; Include specific files with extension .ext &ndash;&gt;-->
-<!--                                    </fileset>-->
+                                    <fileset dir="${project.basedir}/../qrandom-ejbca-loader/target">
+                                        <include name="qrandom-ejbca-loader.war"/>
+                                    </fileset>
                                     <fileset dir="${project.basedir}/../qrandom-bcprov/target">
                                         <include name="qrandom-bcprov-${project.version}.jar"/>
                                     </fileset>
@@ -68,6 +76,7 @@
                             <repository>qrandom/ejbca-ce</repository>
                             <tag>${project.version}</tag>
                             <dockerfile>target/Dockerfile</dockerfile> <!-- Specify the path to the Dockerfile -->
+                            <!-- TODO: specify PROJECT_VERSION arg -->
                             <contextDirectory>target</contextDirectory>
                         </configuration>
                     </execution>

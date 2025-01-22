@@ -6,6 +6,7 @@
 
     <resources>
         <resource-root path="bcprov-jdk15on-1.69.jar"/>
+        <!-- TODO: replace with project.version through docker RUN sed -i -->
         <resource-root path="qrandom-bcprov-1.0-SNAPSHOT.jar"/>
     </resources>
     <provides>
@@ -17,7 +18,7 @@
     <dependencies>
         <module name="java.naming"/>
         <module name="java.sql"/>
-        <module name="com.qrypt.qrandom-core"/>
+        <module name="com.qrypt.qrandom.core"/>
         <module name="org.slf4j"/>
         <module name="org.slf4j.impl"/>
     </dependencies>

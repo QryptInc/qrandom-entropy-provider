@@ -1,0 +1,8 @@
+<jboss-deployment-structure>
+    <deployment>
+        <dependencies>
+            <module name="com.qrypt.qrandom.core" export="true"/>
+            <module name="org.bouncycastle.bcprov"/>
+        </dependencies>
+    </deployment>
+</jboss-deployment-structure>
