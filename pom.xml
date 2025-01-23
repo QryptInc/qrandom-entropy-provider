@@ -10,6 +10,7 @@
         <module>qrandom-bcprov</module>
         <module>qrandom-ejbca-docker</module>
         <module>qrandom-ejbca-loader</module>
+        <module>qrandom-bcfips</module>
     </modules>
 
     <dependencies>
