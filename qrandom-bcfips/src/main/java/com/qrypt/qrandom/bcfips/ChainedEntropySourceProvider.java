@@ -19,7 +19,6 @@ public class ChainedEntropySourceProvider implements EntropySourceProvider {
 
     private final EntropySourceProvider primary;
     private final EntropySourceProvider fallback;
-    //private final int thresholdBytes;
 
     public ChainedEntropySourceProvider() {
         logger.info("Initializing ChainedEntropySourceProvider....");

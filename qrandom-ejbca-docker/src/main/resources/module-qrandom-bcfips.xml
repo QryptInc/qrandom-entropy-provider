@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Note: below is the potential setup with bc-fips library supported by Keyfactor products -->
+<module name="com.qrypt.qrandom.bcfips" xmlns="urn:jboss:module:1.9">
+
+    <properties>
+        <property name="jboss.api" value="private"/>
+    </properties>
+
+    <resources>
+        <!-- TODO: replace with project.version through docker RUN sed -i -->
+        <resource-root path="qrandom-bcfips-1.0-SNAPSHOT-jar-with-dependencies.jar"/>
+    </resources>
+    <provides>
+        <service name="java.security.Provider">
+            <with-class name="com.qrypt.qrandom.bcfips.QryptProvider"/>
+        </service>
+    </provides>
+    <dependencies>
+        <module name="java.naming"/>
+        <module name="java.sql"/>
+        <module name="com.qrypt.qrandom.core"/>
+        <module name="org.slf4j"/>
+        <module name="org.slf4j.impl"/>
+    </dependencies>
+</module>

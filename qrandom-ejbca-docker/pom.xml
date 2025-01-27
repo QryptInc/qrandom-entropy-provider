@@ -44,6 +44,9 @@
                                     <fileset dir="${project.basedir}/../qrandom-core/target">
                                         <include name="qrandom-core-${project.version}.jar"/>
                                     </fileset>
+                                    <fileset dir="${project.basedir}/../qrandom-bcfips/target">
+                                        <include name="qrandom-bcfips-${project.version}-jar-with-dependencies.jar"/>
+                                    </fileset>
                                     <fileset dir="${project.basedir}/../qrandom-ejbca-loader/target">
                                         <include name="qrandom-ejbca-loader.war"/>
                                     </fileset>
@@ -67,7 +70,7 @@
                 <version>1.4.13</version>
                 <executions>
                     <execution>
-                        <id>default</id>
+                        <id>non-fips</id>
                         <phase>install</phase>
                         <goals>
                             <goal>build</goal>
@@ -82,7 +85,27 @@
                     </execution>
                 </executions>
             </plugin>
-
+<!--            <plugin>-->
+<!--                <groupId>com.spotify</groupId>-->
+<!--                <artifactId>dockerfile-maven-plugin</artifactId>-->
+<!--                <version>1.4.13</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>fips</id>-->
+<!--                        <phase>install</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>build</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <repository>qrandom/ejbca-ce-fips</repository>-->
+<!--                            <tag>${project.version}</tag>-->
+<!--                            <dockerfile>target/Dockerfile-FIPS</dockerfile> &lt;!&ndash; Specify the path to the Dockerfile &ndash;&gt;-->
+<!--                            &lt;!&ndash; TODO: specify PROJECT_VERSION arg &ndash;&gt;-->
+<!--                            <contextDirectory>target</contextDirectory>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
         </plugins>
     </build>
 </project>
